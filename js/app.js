@@ -110,7 +110,8 @@
         //add ui events
         events: {
             "change #filter select": "setFilter",
-            "click #add": "addContact"
+            "click #add": "addContact",
+            "click #showForm": "showForm"
         },
 
         //Set filter property and fire change event
@@ -170,6 +171,10 @@
                     contacts.splice(_.indexOf(contacts, contact), 1);
                 }
             });
+        },
+
+        showForm: function(){
+            this.$el.find("#addContact").slideToggle();
         }
     });
 
