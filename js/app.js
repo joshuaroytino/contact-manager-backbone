@@ -41,6 +41,8 @@
             this.collection = new Directory(contacts);
             this.render();
             this.$el.find("#filter").append(this.createSelect());
+            this.on("change:filterType", this.filterByType, this);
+            this.collection.on("reset", this.render, this);
         },
      
         render: function () {
@@ -87,17 +89,17 @@
             this.trigger("change:filterType");
         },
 
-        filterByType: function(){
-            if(this.filterType === "all"){
+        filterByType: function () {
+            if (this.filterType === "all") {
                 this.collection.reset(contacts);
             } else {
-                this.collection.reset(contacts, {silent: true});
-
+                this.collection.reset(contacts, { silent: true });
+         
                 var filterType = this.filterType,
                     filtered = _.filter(this.collection.models, function (item) {
-                        return item.get("type").toLowerCase() === filterType;
-                    });
-
+                    return item.get("type").toLowerCase() === filterType;
+                });
+         
                 this.collection.reset(filtered);
             }
         }
