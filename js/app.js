@@ -86,7 +86,8 @@
 
         //add ui events
         events: {
-            "change #filter select": "setFilter"
+            "change #filter select": "setFilter",
+            "click #add": "addContact"
         },
 
         //Set filter property and fire change event
@@ -111,6 +112,26 @@
                 this.collection.reset(filtered);
 
                 contactsRouter.navigate("filter/" + filterType);
+            }
+        },
+
+        addContact: function(e){
+            e.preventDefault();
+
+            var formData = {};
+            $("#addContact").children("input").each(function(i, el){
+                if($(el).val() !== ""){
+                    formData[el.id] = $(el).val();
+                }
+            });
+
+            contacts.push(formData);
+
+            if(_.indexOf(this.getTypes(), formData.type) === -1){
+                this.collection.add(new Contact(formData));
+                this.$el.find("#filter").find("select").remove().end().append(this.createSelect());
+            } else {
+                this.collection.add(new Contact(formData));
             }
         }
     });
