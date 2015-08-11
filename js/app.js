@@ -18,3 +18,20 @@ var Contact = Backbone.Model.extend({
         photo: "/img/placeholder.png"
     }
 });
+
+var Directory = Backbone.Collection.extend({
+    model: Contact
+});
+
+var ContactView = Backbone.View.extend({
+    tagName: "article",
+    classNmae: "contact-container",
+    template: $("#contactTemplate").html(),
+
+    render: function(){
+        var tmpl = _.template(this.template);
+
+        this.$el.html(tmpl(this.model.toJSON()));
+        return this;
+    }
+});
