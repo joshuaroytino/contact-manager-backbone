@@ -70,6 +70,11 @@
             this.on("change:filterType", this.filterByType, this);
             this.collection.on("reset", this.render, this);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            this.collection.on("add", this.renderContact, this);
+            this.collection.on("delete", this.removeContact, this);
+>>>>>>> origin/3_part_three
 =======
             this.collection.on("add", this.renderContact, this);
             this.collection.on("delete", this.removeContact, this);
@@ -113,7 +118,13 @@
         //add ui events
         events: {
 <<<<<<< HEAD
+<<<<<<< HEAD
             "change #filter select": "setFilter"
+=======
+            "change #filter select": "setFilter",
+            "click #add": "addContact",
+            "click #showForm": "showForm"
+>>>>>>> origin/3_part_three
 =======
             "change #filter select": "setFilter",
             "click #add": "addContact",
@@ -145,7 +156,10 @@
                 contactsRouter.navigate("filter/" + filterType);
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/3_part_three
         },
 
         addContact: function(e){
@@ -184,6 +198,9 @@
 
         showForm: function(){
             this.$el.find("#addContact").slideToggle();
+<<<<<<< HEAD
+>>>>>>> origin/3_part_three
+=======
 >>>>>>> origin/3_part_three
         }
     });
