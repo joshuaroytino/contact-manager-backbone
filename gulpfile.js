@@ -12,7 +12,7 @@ gulp.task('default', ['copyJS']);
 gulp.task('copyJS', function() {
 	gulp.src('bower_components/backbone/backbone-min.js').pipe(gulp.dest('js'));
 	gulp.src('bower_components/jquery/dist/jquery.min.js').pipe(gulp.dest('js'));
-	gulp.src('bower_components/underscore/underscore.min.js').pipe(gulp.dest('js'));
+	gulp.src('bower_components/underscore/underscore-min.js').pipe(gulp.dest('js'));
 });
 
 // configure the jshint task
