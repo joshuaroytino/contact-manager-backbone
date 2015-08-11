@@ -113,6 +113,10 @@
                 }
             });
         },
+
+        cancelEdit: function(e){
+            this.render();
+        }
     });
 
     //define master view
