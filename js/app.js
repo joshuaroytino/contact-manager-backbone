@@ -38,6 +38,22 @@
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
+        },
+
+        events: {
+            "click button.delete": "deleteContact"
+        },
+
+        deleteContact: function(){
+            var removedType = this.model.get("type").toLowerCase();
+
+            this.model.destroy();
+
+            this.remove();
+
+            if(_.indexOf(directory.getTypes(), removedType) === -1){
+                directory.$el.find("#filter select").children("[value='" + removedType + "']").remove();
+            }
         }
     });
 
