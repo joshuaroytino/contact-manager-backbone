@@ -15,7 +15,12 @@
     //define product model
     var Contact = Backbone.Model.extend({
         defaults: {
-            photo: "img/placeholder.png"
+            photo: "img/placeholder.png",
+            name: "",
+            address: "",
+            tel: "",
+            email: "",
+            type: ""
         }
     });
 
@@ -48,6 +53,7 @@
 
             this.on("change:filterType", this.filterByType, this);
             this.collection.on("reset", this.render, this);
+            this.collection.on("add", this.renderContact, this);
         },
 
         render: function () {
