@@ -41,7 +41,10 @@
         },
 
         events: {
-            "click button.delete": "deleteContact"
+            "click button.delete": "deleteContact",
+            "click button.edit": "editContact",
+            "click button.save": "saveEdits",
+            "click button.cancel": "cancelEdit"
         },
 
         deleteContact: function(){
