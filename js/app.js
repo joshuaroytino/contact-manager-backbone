@@ -70,6 +70,7 @@
             this.on("change:filterType", this.filterByType, this);
             this.collection.on("reset", this.render, this);
             this.collection.on("add", this.renderContact, this);
+            this.collection.on("delete", this.removeContact, this);
         },
 
         render: function () {
@@ -155,6 +156,20 @@
             } else {
                 this.collection.add(new Contact(formData));
             }
+        },
+
+        removeContact: function(e){
+            var removed = removedModel.attributes;
+
+            if(remove.photo === "img/placeholder.png"){
+                delete removed.photo;
+            }
+
+            _.each(contacts, function(contact){
+                if(_.isEqual(contact, removed)){
+                    contacts.splice(_.indexOf(contacts, contact), 1);
+                }
+            });
         }
     });
 
