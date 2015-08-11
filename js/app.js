@@ -68,12 +68,51 @@
                 value: "addType"
             });
 
-            this.select = directory.createSelect().addClass("type")
-                .val(this.$el.find("#type").val()).append(newOpt)
-                .insertAfter(this.$el.find(".name"));
-
+            this.select = directory.createSelect().addClass("type").val(this.$el.find("#type").val()).append(newOpt).insertAfter(this.$el.find(".name"));
             this.$el.find("input[type='hidden']").remove();
-        }
+        },
+
+        addType: function () {
+            if (this.select.val() === "addType") {
+
+                this.select.remove();
+
+                $("<input />", {
+                    "class": "type"
+                }).insertAfter(this.$el.find(".name")).focus();
+            }
+        },
+
+        saveEdits: function (e) {
+            e.preventDefault();
+         
+            var formData = {},
+                prev = this.model.previousAttributes();
+         
+            $(e.target).closest("form").find(":input").add(".photo").each(function () {
+         
+                var el = $(this);
+                formData[el.attr("class")] = el.val();
+            });
+         
+            if (formData.photo === "") {
+                delete formData.photo;
+            }
+         
+            this.model.set(formData);
+         
+            this.render();
+         
+            if (prev.photo === "img/placeholder.png") {
+                delete prev.photo;
+            }
+         
+            _.each(contacts, function (contact) {
+                if (_.isEqual(contact, prev)) {
+                    contacts.splice(_.indexOf(contacts, contact), 1, formData);
+                }
+            });
+        },
     });
 
     //define master view
