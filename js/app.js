@@ -76,6 +76,30 @@
                 }).appendTo(select);
             });
             return select;
+        },
+
+        events: {
+            "change #filter select": "setFilter" 
+        },
+
+        setFilter: function(e){
+            this.filterType = e.currentTarget.value;
+            this.trigger("change:filterType");
+        },
+
+        filterByType: function(){
+            if(this.filterType === "all"){
+                this.collection.reset(contacts);
+            } else {
+                this.collection.reset(contacts, {silent: true});
+
+                var filterType = this.filterType,
+                    filtered = _.filter(this.collection.models, function (item) {
+                        return item.get("type").toLowerCase() === filterType;
+                    });
+
+                this.collection.reset(filtered);
+            }
         }
     });
 
