@@ -1,0 +1,24 @@
+{
+  "name": "contact-manager-backbone",
+  "version": "1.0.0",
+  "description": "Contacts manager using Backbone.js",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshuaroytino/contact-manager-backbone.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joshuaroytino/contact-manager-backbone/issues"
+  },
+  "homepage": "https://github.com/joshuaroytino/contact-manager-backbone",
+  "devDependencies": {
+    "gulp-jshint": "^1.11.2",
+    "gulp-util": "^3.0.6",
+    "jshint-stylish": "^2.0.1"
+  }
+}
