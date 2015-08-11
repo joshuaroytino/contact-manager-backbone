@@ -15,7 +15,12 @@
     //define product model
     var Contact = Backbone.Model.extend({
         defaults: {
-            photo: "img/placeholder.png"
+            photo: "img/placeholder.png",
+            name: "",
+            address: "",
+            tel: "",
+            email: "",
+            type: ""
         }
     });
 
@@ -33,6 +38,22 @@
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
+        },
+
+        events: {
+            "click button.delete": "deleteContact"
+        },
+
+        deleteContact: function(){
+            var removedType = this.model.get("type").toLowerCase();
+
+            this.model.destroy();
+
+            this.remove();
+
+            if(_.indexOf(directory.getTypes(), removedType) === -1){
+                directory.$el.find("#filter select").children("[value='" + removedType + "']").remove();
+            }
         }
     });
 
@@ -48,6 +69,11 @@
 
             this.on("change:filterType", this.filterByType, this);
             this.collection.on("reset", this.render, this);
+<<<<<<< HEAD
+=======
+            this.collection.on("add", this.renderContact, this);
+            this.collection.on("delete", this.removeContact, this);
+>>>>>>> origin/3_part_three
         },
 
         render: function () {
@@ -86,7 +112,13 @@
 
         //add ui events
         events: {
+<<<<<<< HEAD
             "change #filter select": "setFilter"
+=======
+            "change #filter select": "setFilter",
+            "click #add": "addContact",
+            "click #showForm": "showForm"
+>>>>>>> origin/3_part_three
         },
 
         //Set filter property and fire change event
@@ -112,6 +144,47 @@
 
                 contactsRouter.navigate("filter/" + filterType);
             }
+<<<<<<< HEAD
+=======
+        },
+
+        addContact: function(e){
+            e.preventDefault();
+
+            var formData = {};
+            $("#addContact").children("input").each(function(i, el){
+                if($(el).val() !== ""){
+                    formData[el.id] = $(el).val();
+                }
+            });
+
+            contacts.push(formData);
+
+            if(_.indexOf(this.getTypes(), formData.type) === -1){
+                this.collection.add(new Contact(formData));
+                this.$el.find("#filter").find("select").remove().end().append(this.createSelect());
+            } else {
+                this.collection.add(new Contact(formData));
+            }
+        },
+
+        removeContact: function(e){
+            var removed = removedModel.attributes;
+
+            if(remove.photo === "img/placeholder.png"){
+                delete removed.photo;
+            }
+
+            _.each(contacts, function(contact){
+                if(_.isEqual(contact, removed)){
+                    contacts.splice(_.indexOf(contacts, contact), 1);
+                }
+            });
+        },
+
+        showForm: function(){
+            this.$el.find("#addContact").slideToggle();
+>>>>>>> origin/3_part_three
         }
     });
 
